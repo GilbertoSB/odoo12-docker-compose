@@ -49,11 +49,13 @@ services:
       - ./etc/piercho:/etc/opiercho
     restart: always             # run as a service
 
-  volumes:
-    db-data:
-      driver: local
-    web-data:
-      driver: local
+volumes:
+  db-data:
+    driver: local
+  web-data-sait:
+    driver: local
+  web-data-piercho:
+    driver: local
 
 
 
