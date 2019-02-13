@@ -3,7 +3,7 @@ services:
   mydb:
     image: postgres:10
     ports:
-      - 5432:5432/tcp
+      - 5422:5432/tcp
     environment:
       - POSTGRES_PASSWORD=odoo
       - POSTGRES_USER=odoo
@@ -13,11 +13,11 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data/pgdata
 
-  dbadmin:
-    image: adminer
-    restart: always
-    ports:
-      - 8040:8080/tcp
+#  dbadmin:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - 8040:8080/tcp
 
   osait:
     image: odoo:12.0
