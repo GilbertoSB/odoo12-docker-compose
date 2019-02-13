@@ -27,7 +27,7 @@ services:
     #command: -- --dev=reload
     #command: odoo scaffold /mnt/extra-addons/test_module
     volumes:      
-      - odoo-web-data:/var/lib/odoosait
+      - odoo-sait-data:/var/lib/odoo
       - ./addons:/mnt/extra-addons
       - ./etc/sait:/etc/osait
     restart: always             # run as a service
@@ -42,12 +42,13 @@ services:
     #command: -- --dev=reload
     #command: odoo scaffold /mnt/extra-addons/test_module
     volumes:      
-      - odoo-web-data:/var/lib/odoopiercho
+      - odoo-piercho-data:/var/lib/odoo
       - ./addons:/mnt/extra-addons
       - ./etc/piercho:/etc/opiercho
     restart: always             # run as a service
 
   volumes:
-    odoo-web-data:
+    odoo-sait-data: /var/lib/odoo
+    odoo-piercho-data: /var/lib/odoo
     odoo-db-data:
 
