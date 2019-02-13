@@ -1,23 +1,53 @@
-version: '2'
+version: '3.1'
 services:
-  db:
-    image: postgres:9.5
+  mydb:
+    image: postgres:10
     environment:
       - POSTGRES_PASSWORD=odoo
       - POSTGRES_USER=odoo
       - POSTGRES_DB=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
     restart: always             # run as a service
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
 
-  odoo12:
+  dbadmin:
+    image: adminer
+    restart: always
+    ports:
+      - 8040:8080
+
+  osait:
     image: odoo:12.0
     depends_on:
-      - db
+      - mydb
     ports:
-      - "8071:8069"
+      - "8060:8069"
     tty: true
-    command: -- --dev=reload
-#    command: odoo scaffold /mnt/extra-addons/test_module
-    volumes:
+    #command: -- --dev=reload
+    #command: odoo scaffold /mnt/extra-addons/test_module
+    volumes:      
+      - odoo-web-data:/var/lib/odoosait
       - ./addons:/mnt/extra-addons
-      - ./etc:/etc/odoo
+      - ./etc/sait:/etc/osait
     restart: always             # run as a service
+
+  opiercho:
+    image: odoo:12.0
+    depends_on:
+      - mydb
+    ports:
+      - "8070:8069"
+    tty: true
+    #command: -- --dev=reload
+    #command: odoo scaffold /mnt/extra-addons/test_module
+    volumes:      
+      - odoo-web-data:/var/lib/odoopiercho
+      - ./addons:/mnt/extra-addons
+      - ./etc/piercho:/etc/opiercho
+    restart: always             # run as a service
+
+  volumes:
+    odoo-web-data:
+    odoo-db-data:
+
