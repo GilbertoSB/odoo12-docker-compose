@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
   mydb:
     image: postgres:10
@@ -29,9 +29,9 @@ services:
     #command: -- --dev=reload
     #command: odoo scaffold /mnt/extra-addons/test_module
     volumes:      
-      - web-data-sait:/var/lib/odoosait
-      - ./addons:/mnt/extra-addons
-      - ./etc/sait:/etc/osait
+      - ./etc/sait/data:/var/lib/odoo
+      - ./addons:/mnt/addons
+      - ./etc/sait/config:/etc/odoo
     restart: always             # run as a service
 
   opiercho:
@@ -44,18 +44,11 @@ services:
     #command: -- --dev=reload
     #command: odoo scaffold /mnt/extra-addons/test_module
     volumes:      
-      - web-data-piercho:/var/lib/odoopiercho
-      - ./addons:/mnt/extra-addons
-      - ./etc/piercho:/etc/opiercho
+      - ./etc/piercho/data:/var/lib/odoo
+      - ./addons:/mnt/addons
+      - ./etc/piercho/config:/etc/odoo
     restart: always             # run as a service
 
 volumes:
   db-data:
     driver: local
-  web-data-sait:
-    driver: local
-  web-data-piercho:
-    driver: local
-
-
-
